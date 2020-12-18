@@ -39,7 +39,7 @@ class CityViewController: UIViewController {
             // 3. １で用意した遷移先の変数に値を渡す
             next?.outputCountry = city.icon
             next?.outputCity = city.name
-            next?.outputTemp = city.temp
+            next?.outputTemp = " \(city.temp)"
             next?.outputSum = city.summary
             
         }
