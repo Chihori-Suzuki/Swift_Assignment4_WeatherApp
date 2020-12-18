@@ -11,11 +11,6 @@ import UIKit
 class CityViewController: UIViewController {
 
 	var city: City!
-
-    var inputCountry: String
-    var inputCity: String
-    var inputTemperature: Double
-    var inputSummary: String
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -39,23 +34,26 @@ class CityViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // segueのIDを確認して特定のsegueのときのみ動作させる
         if segue.identifier == "toBViewController" {
-        // 2. 遷移先のViewControllerを取得
-        let next = segue.destination as? DetailsViewController
-        // 3. １で用意した遷移先の変数に値を渡す
-        next?.outputCountry = inputCountry
-        next?.outputCity = inputCity
-        next?.outputTemp = inputTemperature
-        next?.outputSum = inputSummary
+            // 2. 遷移先のViewControllerを取得
+            let next = segue.destination as? DetailsViewController
+            // 3. １で用意した遷移先の変数に値を渡す
+            next?.outputCountry = city.icon
+            next?.outputCity = city.name
+            next?.outputTemp = city.temp
+            next?.outputSum = city.summary
+            
         }
     }
     
   @objc func showWeatherDetails() {
-    var details = DetailsViewController()
+    
     
   }
     func tapTransitionButton(_ sender: UIButton) {
-            // 4. 画面遷移実行
-            performSegue(withIdentifier: "toBViewController", sender: nil)
+        // 4. 画面遷移実行
+        performSegue(withIdentifier: "toBViewController", sender: nil)
+        
+        
     }
     
 }
