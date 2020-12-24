@@ -9,6 +9,7 @@
 import Foundation
 
 struct City {
+    let flag: String
 	let name: String
 	let temp: Double
 	let precipitation: Double

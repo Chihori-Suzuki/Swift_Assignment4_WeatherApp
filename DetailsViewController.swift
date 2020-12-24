@@ -9,45 +9,52 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
-
-    var outputCountry: String = ""
-    var outputCity: String = ""
-    var outputTemp: String = ""
-    var outputSum: String = ""
+    
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 20
+        return stackView
+    }()
+    
+    var city: City!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        
-        let countryLable = UILabel(frame: CGRect(x: view.bounds.width / 2 - 150, y: view.bounds.height / 2 - 200, width: 100, height: 25))
-        countryLable.text = "country"
-        let countryResultLable = UILabel(frame: CGRect(x: view.bounds.width / 2 - 150, y: view.bounds.height / 2 - 200, width: 100, height: 25))
-        let cityLable = UILabel(frame: CGRect(x: view.bounds.width / 2 - 150, y: view.bounds.height / 2 - 200, width: 100, height: 25))
-        cityLable.text = "city"
-        let cityResultLable = UILabel(frame: CGRect(x: view.bounds.width / 2 - 150, y: view.bounds.height / 2 - 200, width: 100, height: 25))
-        let tempretureLabel = UILabel(frame: CGRect(x: view.bounds.width / 2 - 150, y: view.bounds.height / 2 - 200, width: 100, height: 25))
-        tempretureLabel.text = "temprature"
-        let tempretureResultLabel = UILabel(frame: CGRect(x: view.bounds.width / 2 - 150, y: view.bounds.height / 2 - 200, width: 100, height: 25))
-        let summaryLabel = UILabel(frame: CGRect(x: view.bounds.width / 2 - 150, y: view.bounds.height / 2 - 200, width: 100, height: 25))
-        summaryLabel.text = "summary"
-        let summaryResultLabel = UILabel(frame: CGRect(x: view.bounds.width / 2 - 150, y: view.bounds.height / 2 - 200, width: 100, height: 25))
-
-        countryResultLable.text = outputCountry
-        cityResultLable.text = outputCity
-        tempretureResultLabel.text = outputTemp
-        summaryResultLabel.text = outputSum
-        
+        view.addSubview(stackView)
+        setUpLayout()
     }
     
+    func createLabel(text: String, size: CGFloat, weight: UIFont.Weight) -> UILabel {
+        
+        let label = UILabel()
+        label.text = text
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: size, weight: weight)
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        return label
     }
-    */
-
+    
+    
+    func setUpLayout() {
+        
+        stackView.addArrangedSubview(createLabel(text: "Country", size: 25, weight: .bold))
+        stackView.addArrangedSubview(createLabel(text: city.flag, size: 20, weight: .regular))
+        stackView.addArrangedSubview(createLabel(text: "City", size: 25, weight: .bold))
+        stackView.addArrangedSubview(createLabel(text: city.name, size: 20, weight: .regular))
+        stackView.addArrangedSubview(createLabel(text: "Tempreture", size: 25, weight: .bold))
+        stackView.addArrangedSubview(createLabel(text: String(city.temp), size: 20, weight: .regular))
+        stackView.addArrangedSubview(createLabel(text: "Summary", size: 25, weight: .bold))
+        stackView.addArrangedSubview(createLabel(text: String(city.summary), size: 20, weight: .regular))
+        
+        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 100).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100).isActive = true
+        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: 80).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor , constant: -80).isActive = true
+    }
 }

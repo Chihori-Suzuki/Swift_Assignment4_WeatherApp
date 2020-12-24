@@ -29,32 +29,34 @@ class CityViewController: UIViewController {
 		
 		view.addSubview(cityLabel)
 		view.addSubview(butt)
+//        butt.addTarget(self, action: #selector(tapTransitionButton(_:)), for: .touchUpInside)
 	}
-    // segueが動作することをViewControllerに通知するメソッド
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // segueのIDを確認して特定のsegueのときのみ動作させる
-        if segue.identifier == "toBViewController" {
-            // 2. 遷移先のViewControllerを取得
-            let next = segue.destination as? DetailsViewController
-            // 3. １で用意した遷移先の変数に値を渡す
-            next?.outputCountry = city.icon
-            next?.outputCity = city.name
-            next?.outputTemp = " \(city.temp)"
-            next?.outputSum = city.summary
-            
-        }
-    }
+//    // segueが動作することをViewControllerに通知するメソッド
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        // segueのIDを確認して特定のsegueのときのみ動作させる
+//        if segue.identifier == "toBViewController" {
+//            // 2. 遷移先のViewControllerを取得
+//            guard let next = segue.destination as? DetailsViewController else { return }
+//            // 3. １で用意した遷移先の変数に値を渡す
+//            next.outputCountry = city.icon
+//            next.outputCity = city.name
+//            next.outputTemp = " \(city.temp)"
+//            next.outputSum = city.summary
+//        }
+//    }
     
   @objc func showWeatherDetails() {
-    
+    let detailsVC = DetailsViewController()
+    detailsVC.city = city
+    navigationController?.pushViewController(detailsVC, animated: true)
     
   }
-    func tapTransitionButton(_ sender: UIButton) {
-        // 4. 画面遷移実行
-        performSegue(withIdentifier: "toBViewController", sender: nil)
-        
-        
-    }
+    
+//    @objc  func tapTransitionButton(_ sender: Any) {
+//        // 4. 画面遷移実行
+//        performSegue(withIdentifier: "toBViewController", sender: nil)
+//
+//    }
     
 }
 
